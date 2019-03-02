@@ -1,0 +1,16 @@
+body {
+  background-color: rgb(146, 245, 146);
+}
+
+.container {s
+  background-color: white;
+  margin: 20px;
+  padding-top: 30px;
+}
+
+
+.jumbotron {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
