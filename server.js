@@ -1,5 +1,10 @@
 const express = require('express')
 
+
+// TEMP DATA ######################
+const data = require('./mockData/dataIndex')
+// ################################
+
 // Configure App
 const PORT = process.env.PORT || 4000
 
@@ -16,6 +21,9 @@ app.use(express.static(__dirname + '/public'))
 
 // TMP route -> '/'
 app.get('/', (req, res) => res.render('index'))
+
+// TMP route -> '/api/accounts'
+app.get('/api/accounts', (req, res) => res.send(data))
 
 // #################################
 
