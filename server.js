@@ -12,8 +12,6 @@ const LOCAL_DBURL = require('./.env')
 const PORT = process.env.PORT || 4000
 const DBURL = process.env.DATABASE_URL || LOCAL_DBURL
 
-console.log(DBURL)
-
 // Instantiate App
 const app = express()
 
