@@ -1,18 +1,30 @@
 const express = require('express')
-const graphqlHTTP = require('express-graphql');
-
-// GQL Schema
-const schema = require('./schema/schema')
+const graphqlHTTP = require('express-graphql')
+const mongoose = require('mongoose')
 
 // TEMP DATA ######################
-const data = require('./mockData/dataIndex')
+// const data = require('./mockData/dataIndex')
 // ################################
 
-// Configure App
+// Configuration
+const schema = require('./schema/schema')
+const LOCAL_DBURL = require('./.env')
 const PORT = process.env.PORT || 4000
+const DBURL = process.env.DATABASE_URL || LOCAL_DBURL
+
+console.log(DBURL)
 
 // Instantiate App
 const app = express()
+
+// TODO: DEBUG Mongoose Connection
+// TODO: .env for local, process.env for Prod/heroku
+// Database Connection
+// mongoose.connect(DBURL, { useNewUrlParser: true })
+// const db = mongoose.connection
+// db.once('open', () => {
+//   console.log('Now connected to Database.')
+// })
 
 
 // #################################
@@ -26,7 +38,7 @@ app.use(express.static(__dirname + '/public'))
 app.get('/', (req, res) => res.render('index'))
 
 // TMP route -> '/api/accounts'
-app.get('/api/accounts', (req, res) => res.send(data))
+// app.get('/api/accounts', (req, res) => res.send(data))
 // #################################
 
 
