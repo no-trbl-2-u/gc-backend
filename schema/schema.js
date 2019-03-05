@@ -1,9 +1,6 @@
 const graphQL = require('graphql')
 
-// TMP DATA #############
-// const mockData = require('../mockData/dataIndex')
-// ######################
-
+// Models
 const Account = require('../models/Account')
 
 // GraphQL Types
