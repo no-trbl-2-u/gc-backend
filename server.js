@@ -8,12 +8,9 @@ const schema = require('./schema/schema')
 const PORT = process.env.PORT || 4000
 const DBURL = process.env.DATABASE_URL || require('./.env')
 
-
 // Instantiate App
 const app = express()
 
-// TODO: .env for local, process.env for Prod/heroku
-// TODO: I DID NOT push to heroku. WILL NOT PUSH until connection is fixed
 // Database Connection
 mongoose.connect(DBURL, { useNewUrlParser: true })
 const db = mongoose.connection

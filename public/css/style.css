@@ -2,14 +2,21 @@ body {
   background-color: rgb(146, 245, 146);
 }
 
-.container {s
+.container {
   background-color: white;
+  border-radius: 50px;
+
   margin: 20px;
-  padding-top: 30px;
+  padding: 20px;
+
+  border: 4px dotted black;
+
+  box-shadow: 4px 4px 16px black;
+  text-shadow: 2px 2px 2px rgb(175, 175, 175);
 }
 
 
-.jumbotron {
+.container h1 {
   margin-left: 10px;
   margin-right: 10px;
   text-align: center;

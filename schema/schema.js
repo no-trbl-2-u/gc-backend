@@ -12,6 +12,7 @@ const {
   GraphQLSchema
 } = graphQL
 
+// TODO: Update Account Type w/ more parameters
 // Account Type
 const AccountType = new GraphQLObjectType({
   name:'Account',
@@ -26,8 +27,7 @@ const AccountType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    // ALL POSSIBLE QUERIES ###########################
-
+    // ALL POSSIBLE QUERIES
     // Single Account
     account: {
       type: AccountType,
@@ -47,26 +47,33 @@ const RootQuery = new GraphQLObjectType({
   }
 })
 
-// TODO: Mutation Procedure
+
 // Mutation Procedure
-// const Mutation = new GraphQLObjectType({
-//   name: 'Mutation',
-//   fields: {
-//     // ALL POSSIBLE MUTATIONS ########
-//     // Add Account
-//     addAccount: {
-//       type: AccountType,
-//       args: {
-//         username: {type: GraphQLString},
-//         password: {type: GraphQLString}
-//       },
-//       resolve(par, args) {
-        
-//       }
-//     }
-//   }
-// })
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    // ALL POSSIBLE MUTATIONS
+
+    // Add Account
+    addAccount: {
+      type: AccountType,
+      args: {
+        username: {type: GraphQLString},
+        password: {type: GraphQLString}
+      },
+      resolve(par, args) {
+        let account = new Account({
+          username: args.username,
+          password: args.password
+        })
+        return account.save()
+      }
+    }
+
+  }
+})
 
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 })
