@@ -1,5 +1,6 @@
 // server.js
 const express = require('express')
+const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const mongoose = require('mongoose')
 
@@ -32,6 +33,9 @@ app.use(express.static(__dirname + '/public'))
 app.get('/', (req, res) => res.render('index'))
 // #################################
 
+
+// Cross-Origin Resource Sharing
+app.use(cors())
 
 // route -> '/gql'
 app.use('/gql', graphqlHTTP({
