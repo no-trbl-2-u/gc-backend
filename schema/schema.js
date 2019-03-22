@@ -59,13 +59,15 @@ const Mutation = new GraphQLObjectType({
     addAccount: {
       type: AccountType,
       args: {
-        username: {type: GraphQLString},
-        password: {type: GraphQLString}
+        username: { type: GraphQLString },
+        password: { type: GraphQLString },
+        email: { type: GraphQLString }
       },
       resolve(par, args) {
         let account = new Account({
           username: args.username,
-          password: args.password
+          password: args.password,
+          email: args.email
         })
         return account.save()
       }
