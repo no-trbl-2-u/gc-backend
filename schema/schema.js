@@ -19,7 +19,8 @@ const AccountType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     username: { type: GraphQLString },
-    password: { type: GraphQLString }
+    password: { type: GraphQLString },
+    email: { type: GraphQLString }
   })
 })
 
