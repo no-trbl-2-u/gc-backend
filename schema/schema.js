@@ -1,4 +1,5 @@
 const graphQL = require('graphql')
+const bcrypt = require('bcrypt')
 
 // Models
 const Account = require('../models/Account')
@@ -64,15 +65,17 @@ const Mutation = new GraphQLObjectType({
         email: { type: GraphQLString }
       },
       resolve(par, args) {
-        let account = new Account({
-          username: args.username,
-          password: args.password,
-          email: args.email
+        bcrypt.hash(args.password, 10, (err, hash) => {
+
+          let account = new Account({
+            username: args.username,
+            password: hash,
+            email: args.email
+          })
+          return account.save()
         })
-        return account.save()
       }
     }
-
   }
 })
 
