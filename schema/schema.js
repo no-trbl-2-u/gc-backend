@@ -65,13 +65,17 @@ const Mutation = new GraphQLObjectType({
         email: { type: GraphQLString }
       },
       resolve(par, args) {
+        // Generate hash async
         bcrypt.hash(args.password, 10, (err, hash) => {
 
+          // Create Account w/ hashed password
           let account = new Account({
             username: args.username,
             password: hash,
             email: args.email
           })
+
+          // Commit to database
           return account.save()
         })
       }
