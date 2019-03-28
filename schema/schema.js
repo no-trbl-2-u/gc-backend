@@ -67,7 +67,7 @@ const Mutation = new GraphQLObjectType({
       resolve(par, args) {
         // Generate hash async
         bcrypt.hash(args.password, 10, (err, hash) => {
-
+          console.log(err)
           // Create Account w/ hashed password
           let account = new Account({
             username: args.username,
@@ -76,7 +76,9 @@ const Mutation = new GraphQLObjectType({
           })
 
           // Commit to database
-          return account.save()
+          console.log(account)
+          return 0
+          // return account.save()
         })
       }
     }
