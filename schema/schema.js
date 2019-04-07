@@ -14,7 +14,7 @@ const {
   GraphQLSchema
 } = graphQL
 
-// TODO: Update Account Type w/ more parameters
+// TODO: Modularize Schema
 // Account Type
 const AccountType = new GraphQLObjectType({
   name:'Account',
@@ -68,7 +68,8 @@ const Mutation = new GraphQLObjectType({
       resolve(par, args) {
         // Generate hash async
         bcrypt.hash(args.password, 10, (err, hash) => {
-          console.log(err)
+          console.log("Error", err)
+
           // Create Account w/ hashed password
           let account = new Account({
             username: args.username,
@@ -76,13 +77,13 @@ const Mutation = new GraphQLObjectType({
             email: args.email
           })
 
+          // Pass Database connection ??
           const result = validateAccount(account) ? true : false
-          console.log(account)
-          console.log("Testing")
+          
           // account.save()
-          console.log(result)
+          console.log("Result", result)
           // Commit to database
-          return result
+          return true
         })
       }
     }
