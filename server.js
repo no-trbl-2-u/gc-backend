@@ -6,8 +6,12 @@ const mongoose = require('mongoose')
 
 // Configuration
 const schema = require('./schema/schema')
-const PORT = process.env.PORT || 4000
-const DBURL = process.env.DATABASE_URL || require('./.env')
+const PORT = process.argv[3] || 4000
+
+// Set to development db if not in production
+let DBURL = process.argv[2] === "production"
+  ? process.env.DATABASE_URL
+  : require('./.env')
 
 // Instantiate App
 const app = express()
@@ -40,7 +44,7 @@ app.use(cors())
 // route -> '/gql'
 app.use('/gql', graphqlHTTP({
   schema,
-  graphiql: true
+  graphiql: process.argv[2] === 'develop' ? true : false
 }))
 
 // Listening on...

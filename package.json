@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "develop": "nodemon server.js develop 3000",
+    "production": "nodemon server.js production 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

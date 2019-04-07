@@ -1,5 +1,6 @@
 const graphQL = require('graphql')
 const bcrypt = require('bcrypt')
+const validateAccount = require('../utils')
 
 // Models
 const Account = require('../models/Account')
@@ -75,10 +76,13 @@ const Mutation = new GraphQLObjectType({
             email: args.email
           })
 
-          // Commit to database
+          const result = validateAccount(account) ? true : false
           console.log(account)
-          return 0
-          // return account.save()
+          console.log("Testing")
+          // account.save()
+          console.log(result)
+          // Commit to database
+          return result
         })
       }
     }
