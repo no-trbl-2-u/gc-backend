@@ -68,7 +68,7 @@ const Mutation = new GraphQLObjectType({
       resolve(par, args) {
         // Generate hash async
         bcrypt.hash(args.password, 10, (err, hash) => {
-          console.log("Error", err)
+          if(err) console.log("Error: ", err)
 
           // Create Account w/ hashed password
           let account = new Account({
@@ -77,12 +77,13 @@ const Mutation = new GraphQLObjectType({
             email: args.email
           })
 
-          // Pass Database connection ??
-          const result = validateAccount(account) ? true : false
+          // Validate Entry
+          const validAccount = validateAccount(account) ? true : false
           
-          // account.save()
-          console.log("Result", result)
+          console.log("Valid?: ", validAccount)
+
           // Commit to database
+          // account.save()
           return true
         })
       }
