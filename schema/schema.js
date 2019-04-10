@@ -1,6 +1,6 @@
 const graphQL = require('graphql')
 const bcrypt = require('bcrypt')
-const validateAccount = require('../utils')
+const validateAccount = require('../utils/validateAccount')
 
 // Models
 const Account = require('../models/Account')
@@ -78,12 +78,9 @@ const Mutation = new GraphQLObjectType({
           })
 
           // Validate Entry
-          const validAccount = validateAccount(account) ? true : false
-          
-          console.log("Valid?: ", validAccount)
+          validateAccount(account)
+            .then(ea => ea === true ? account.save() : console.log("Account Exists"))
 
-          // Commit to database
-          // account.save()
           return true
         })
       }
