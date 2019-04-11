@@ -1,6 +1,7 @@
 const graphQL = require('graphql')
 const bcrypt = require('bcrypt')
 const validateAccount = require('../utils/validateAccount')
+const accountLogin = require('../utils/login')
 
 // Models
 const Account = require('../models/Account')
@@ -45,6 +46,17 @@ const RootQuery = new GraphQLObjectType({
       type: GraphQLList(AccountType),
       resolve(par, args) {
         return Account.find({})
+      }
+    },
+
+    // Login
+    accountLogin: {
+      type: AccountType,
+      args: {username: {type: GraphQLString }, password: {type: GraphQLString}},
+      resolve(par, args) {
+        accountLogin(args.username, args.password)
+          .then(hashed => console.log("Hash", hashed))
+          .catch(err => console.log("Error", err))
       }
     }
   }
