@@ -1,1 +1,1 @@
-web: node server.js production
+web: node server.js production 8080
