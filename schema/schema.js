@@ -1,7 +1,9 @@
+// TODO: Modularize Schema
+
 const graphQL = require('graphql')
 const bcrypt = require('bcrypt')
 const validateAccount = require('../utils/validateAccount')
-const accountLogin = require('../utils/login')
+const loginAuth = require('../utils/loginAuth')
 
 // Models
 const Account = require('../models/Account')
@@ -15,7 +17,6 @@ const {
   GraphQLSchema
 } = graphQL
 
-// TODO: Modularize Schema
 // Account Type
 const AccountType = new GraphQLObjectType({
   name:'Account',
@@ -27,11 +28,20 @@ const AccountType = new GraphQLObjectType({
   })
 })
 
+// Login Authorization
+const AuthLogin = new GraphQLObjectType({
+  name: 'AuthLogin',
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: GraphQLString },
+    token: { type: GraphQLString }
+  })
+})
+
 // Root
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    // ALL POSSIBLE QUERIES
     // Single Account
     account: {
       type: AccountType,
@@ -51,11 +61,14 @@ const RootQuery = new GraphQLObjectType({
 
     // Login
     accountLogin: {
-      type: AccountType,
+      type: AuthLogin,
       args: {username: {type: GraphQLString }, password: {type: GraphQLString}},
       resolve(par, args) {
-        accountLogin(args.username, args.password)
-          .then(hashed => console.log("Hash", hashed))
+        return loginAuth(args.username, args.password)
+          .then(token => ({
+            username: args.username,
+            token: token
+          }))
           .catch(err => console.log("Error", err))
       }
     }
