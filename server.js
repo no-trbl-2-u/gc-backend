@@ -9,9 +9,11 @@ const schema = require('./schema/schema')
 const PORT = process.argv[3] || 4000
 
 // Dev vs. Prod Environment
-let DBURL = process.argv[2] === "production"
+const DBURL = process.argv[2] === "production"
   ? process.env.DATABASE_URL
   : require('./.env')
+
+console.log(process.argv[2])
 
 // Instantiate App
 const app = express()
