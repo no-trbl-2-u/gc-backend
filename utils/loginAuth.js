@@ -1,6 +1,6 @@
 const Account = require('../models/Account')
 const bcrypt = require('bcrypt')
-const jwt = require('express-jwt')
+const jwt = require('jsonwebtoken')
 
 async function loginAuth(username, password){
   const account = await Account.findOne({username})
@@ -8,19 +8,15 @@ async function loginAuth(username, password){
     ? bcrypt.compareSync(password, account._doc.password)
     : null
 
-  let testToken = jwt({
-    secret: "Shhhh, this is a secret!",
-    issuer: "/gql-schema"
-  })
-
-
-  // console.log("JWT", testToken(req, res) => )
+  let token = jwt.sign({info: "Payload"}, secret)
 
   result
     ? console.log("Authorized")
     : console.log("Rejected")
 
   return result
+    ? token
+    : null
 }
 
 module.exports = loginAuth
