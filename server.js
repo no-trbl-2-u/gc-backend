@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const schema = require('./schema/schema')
 const PORT = process.argv[3] || 4000
 
-// Set to development db if not in production
+// Dev vs. Prod Environment
 let DBURL = process.argv[2] === "production"
   ? process.env.DATABASE_URL
   : require('./.env')
