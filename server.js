@@ -13,6 +13,8 @@ const DBURL = process.argv[2] === "production"
   ? process.env.DATABASE_URL
   : require('./.env').DEV_DBURL
 
+console.log("DB", DBURL)
+
 // Instantiate App
 const app = express()
 
