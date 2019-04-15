@@ -76,7 +76,7 @@ const RootQuery = new GraphQLObjectType({
 })
 
 
-// Mutation Procedure
+// Mutation Procedures
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
@@ -92,7 +92,7 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(par, args) {
         // Generate hash async
-        bcrypt.hash(args.password, 10, (err, hash) => {
+        return bcrypt.hash(args.password, 10, (err, hash) => {
           if(err) console.log("Error: ", err)
 
           // Create Account w/ hashed password
