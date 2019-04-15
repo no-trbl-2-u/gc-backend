@@ -3,7 +3,6 @@ const express = require('express')
 const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const mongoose = require('mongoose')
-const envConfig = require('./.env') || {}
 
 // Configuration
 const schema = require('./schema/schema')
@@ -12,7 +11,7 @@ const PORT = process.argv[3] || 4000
 // Dev vs. Prod Environment
 const DBURL = process.argv[2] === "production"
   ? process.env.DATABASE_URL
-  : envConfig.DEV_DBURL
+  : require('./.env').DEV_DBURL
 
 // Instantiate App
 const app = express()
