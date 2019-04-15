@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const mongoose = require('mongoose')
-const envConfig = require('./.env')
+const envConfig = require('./.env') || {}
 
 // Configuration
 const schema = require('./schema/schema')
