@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 // Configuration
 const schema = require('./schema/schema')
-const PORT = process.argv[3] || 4000
+const PORT = process.env.PORT || 4000
 
 // Dev vs. Prod Environment
 const DBURL = process.argv[2] === "production"
