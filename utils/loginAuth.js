@@ -1,8 +1,7 @@
 const Account = require('../models/Account')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const envConfig = require('../.env')
-const SECRET = process.env.SECRET || envConfig.SECRET
+const SECRET = process.env.SECRET || require('../.env').SECRET
 
 async function loginAuth(username, password){
   const account = await Account.findOne({username})
@@ -18,6 +17,8 @@ async function loginAuth(username, password){
     ? console.log("Authorized")
     : console.log("Rejected")
 
+  console.log(SECRET)
+  
   return result
     ? token
     : null
