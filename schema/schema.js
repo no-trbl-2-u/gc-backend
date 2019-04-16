@@ -67,8 +67,6 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    // ALL POSSIBLE MUTATIONS
-
     // Add Account
     addAccount: {
       type: AccountType,
@@ -90,15 +88,13 @@ const Mutation = new GraphQLObjectType({
           })
 
           // Validate Entry
-          validateAccount(account)
+          return validateAccount(account)
             .then(ea => ea === true ? account.save() : console.log("Account Exists"))
-
-          return true
         })
       }
     },
 
-    // Login
+    // Login Mutation
     accountLogin: {
       type: AuthLogin,
       args: {
