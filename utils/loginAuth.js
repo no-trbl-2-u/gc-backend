@@ -16,8 +16,6 @@ async function loginAuth(username, password){
   result
     ? console.log("Authorized")
     : console.log("Rejected")
-
-  console.log(SECRET)
   
   return result
     ? token

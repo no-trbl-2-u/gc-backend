@@ -57,21 +57,8 @@ const RootQuery = new GraphQLObjectType({
       resolve(par, args) {
         return Account.find({})
       }
-    },
-
-    // Login
-    accountLogin: {
-      type: AuthLogin,
-      args: {username: {type: GraphQLString }, password: {type: GraphQLString}},
-      resolve(par, args) {
-        return loginAuth(args.username, args.password)
-          .then(token => ({
-            username: args.username,
-            token: token
-          }))
-          .catch(err => console.log("Error", err))
-      }
     }
+
   }
 })
 
@@ -109,7 +96,24 @@ const Mutation = new GraphQLObjectType({
           return true
         })
       }
-    }
+    },
+
+    // Login
+    accountLogin: {
+      type: AuthLogin,
+      args: {
+        username: {type: GraphQLString },
+        password: {type: GraphQLString}
+      },
+      resolve(par, args) {
+        return loginAuth(args.username, args.password)
+          .then(token => ({
+            username: args.username,
+            token: token
+          }))
+          .catch(err => console.log("Error", err))
+      }
+    },
   }
 })
 

@@ -4,7 +4,7 @@ const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const mongoose = require('mongoose')
 
-// Configuration
+// Configuration (Consider npm i --save dotenv)
 const schema = require('./schema/schema')
 const PORT = process.env.PORT || 4000
 
@@ -12,8 +12,6 @@ const PORT = process.env.PORT || 4000
 const DBURL = process.argv[2] === "production"
   ? process.env.DATABASE_URL
   : require('./.env').DEV_DBURL
-
-console.log("DB", DBURL)
 
 // Instantiate App
 const app = express()
